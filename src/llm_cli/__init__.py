@@ -1,2 +1,1 @@
-def hello() -> str:
-    return "Hello from llm-cli!"
+from ._main import main as main
