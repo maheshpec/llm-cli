@@ -8,3 +8,15 @@
 #   with-sources: false
 
 -e file:.
+black==23.3.0
+click==8.1.7
+    # via black
+mypy-extensions==1.0.0
+    # via black
+packaging==24.0
+    # via black
+pathspec==0.12.1
+    # via black
+platformdirs==4.2.0
+    # via black
+ruff==0.3.3

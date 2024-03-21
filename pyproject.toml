@@ -15,10 +15,44 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
-dev-dependencies = []
+dev-dependencies = [
+    "black~=23.3.0",
+    "ruff",
+    "pyright>=1.1.355",
+]
+
+[tool.rye.scripts]
+format = { chain = [
+    "format:ruff",
+    "fix:ruff",
+]}
+"format:black" = "black ."
+"format:ruff" = "ruff format"
+"check:ruff" = "ruff ."
+"fix:ruff" = "ruff --fix ."
 
 [tool.hatch.metadata]
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/llm_cli"]
+
+[tool.black]
+# https://github.com/psf/black
+line-length = 120
+exclude = "(.eggs|.git|.hg|.mypy_cache|.venv|_build|buck-out|build|dist)"
+
+[tool.ruff]
+line-length = 120
+select = [
+    "E", "W",  # see: https://pypi.org/project/pycodestyle
+    "F",  # see: https://pypi.org/project/pyflakes
+    #    "D",  # see: https://pypi.org/project/pydocstyle
+    #    "N",  # see: https://pypi.org/project/pep8-naming
+    #    "S",  # see: https://pypi.org/project/flake8-bandit
+]
+ignore = [
+    "E722", # catch all in except
+    "F405", # star imports
+    "F403" # start imports
+]
